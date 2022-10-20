@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components';
 
 type Props={
     question:string;
@@ -19,17 +20,22 @@ const QuestionCard: React.FC<Props> = ({question,questionNo,totalQuestion,callba
         <div>
             <p dangerouslySetInnerHTML={{__html:question}}/>
         </div>
-        <div>
+        <ButtonContainer>
             {ans.map(an=>(
-                <button disabled={userAns} onClick={()=>callback()}>
+                <button disabled={userAns} key={an} onClick={()=>callback()}>
                     <p dangerouslySetInnerHTML={{__html:an}}/>
                 </button>
                 
             ))}
-        </div>
+        </ButtonContainer>
     
     </div>
   )
 }
 
-export default QuestionCard
+export default QuestionCard;
+
+const ButtonContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+`
