@@ -1,10 +1,10 @@
-import React from 'react'
+import React,{DataHTMLAttributes, MouseEvent} from 'react'
 import styled from 'styled-components';
 
 type Props={
     question:string;
     ans:string[];
-    callback:any;
+    callback:((e:MouseEvent<HTMLElement>)=>void);
     userAns:any;
     totalQuestion:number;
     questionNo:number;
@@ -22,8 +22,8 @@ const QuestionCard: React.FC<Props> = ({question,questionNo,totalQuestion,callba
         </div>
         <ButtonContainer>
             {ans.map(an=>(
-                <button disabled={userAns} key={an} onClick={()=>callback()}>
-                    <p dangerouslySetInnerHTML={{__html:an}}/>
+                <button disabled={userAns ? true : false} key={an} onClick={(e) => callback(e)}>
+                    <p>{an}</p>
                 </button>
                 
             ))}

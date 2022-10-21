@@ -23,7 +23,7 @@ export const fetchQuizQuestions = async (noOfQ: number, difficulty: Difficulty):
     
     const rsp = await fetch(`https://the-trivia-api.com/api/questions?categories=science&limit=10&difficulty=easy`)
     const data = await rsp.json()
-    console.log(data)
+    
     const rsp1 = await  data.map((name:Question)=>({
         ...name,
         answers:shuffleArray([...name.incorrectAnswers,name.correctAnswer])
