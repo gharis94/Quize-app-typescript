@@ -3,6 +3,7 @@ import './App.css';
 import QuestionCard from './Component/QuestionCard/QuestionCard'
 import { fetchQuizQuestions,QuestionState,Difficulty } from './utils/API';
 import { Result}  from './Component/Result';
+import styled from 'styled-components';
 
 const TOTAL_QUESTIONS=10;
 
@@ -25,7 +26,7 @@ function App() {
     console.log(e.target.innerText)
     //console.log(e.target.children.firstElementChild.innerText)
     setUserAnswer(e.target.innerText)
-    console.log('user ans',userAnswer)
+    //console.log('user ans',userAnswer)
    if(e.target ===questionArr[qNo].correctAnswer){
       setCorrect(prev=>prev+1)
     }
@@ -37,21 +38,69 @@ function App() {
   }
   
   return (
-    <>
+    <div className="App">
     {
      !submit ? (
-       <div className="App">
-         {questionArr.length > 0 ? (<QuestionCard totalQuestion={TOTAL_QUESTIONS} ans={questionArr[qNo].answers} question={questionArr[qNo].question} questionNo={qNo + 1} callback={userClick} userAns={userAnswer} />) : null
+       <>
+            {questionArr.length > 0 ? (
+              <QuestionCard 
+              totalQuestion={TOTAL_QUESTIONS} 
+              ans={questionArr[qNo].answers} 
+              question={questionArr[qNo].question} 
+              questionNo={qNo + 1} 
+              callback={userClick} userAns={userAnswer} />) : null
          }
-         <button disabled={qNo === 9 ? true : false} onClick={() =>handleNext() }>Next Question</button>
-         <button onClick={()=>setSubmit(true)}>Submit Quize</button>
-        </div>
+         <ButtonContainer>
+          <Button 
+            disabled={qNo === 9 ? true : false} 
+            onClick={() =>handleNext() }>
+              Next Question
+          </Button>
+          <Button 
+            onClick={()=>setSubmit(true)}>
+              Submit Quize
+          </Button>
+        </ButtonContainer>
+        </>
       ): (
-        <Result score={correct}/>
+          <ResultContainer>
+              <Result score={correct} />
+          </ResultContainer>
+
       )
       }
-    </>
+    </div>
   );
 }
 
 export default App;
+
+const ResultContainer =styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  margin-top:100px;
+`
+const ButtonContainer =styled.div`
+  margin-top:5px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+`
+const Button=styled.button`
+  margin:5px;
+  padding:10px;
+  border-radius:5px;
+  border:none;
+  background-color:blue;
+  color:white;
+  :hover{
+    background-color:aliceblue;
+    color:black;
+  }
+  :disabled{
+    background-color:black
+    
+  }
+`

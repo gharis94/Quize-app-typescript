@@ -22,9 +22,9 @@ const QuestionCard: React.FC<Props> = ({question,questionNo,totalQuestion,callba
         </div>
         <ButtonContainer>
             {ans.map(an=>(
-                <button disabled={userAns ? true : false} key={an} onClick={(e) => callback(e)}>
+                <Button disabled={userAns ? true : false} key={an} onClick={(e) => callback(e)}>
                     <p>{an}</p>
-                </button>
+                </Button>
                 
             ))}
         </ButtonContainer>
@@ -38,4 +38,16 @@ export default QuestionCard;
 const ButtonContainer = styled.div`
     display:flex;
     flex-direction:column;
+    align-items:center;
+    
+`
+const Button =styled.button`
+    margin-top:10px;
+    width:70%;
+    border-radius:5px;
+    background-color:aliceblue;
+    border:none;
+    :hover{
+        background-color:blue;
+    }
 `

@@ -7,7 +7,8 @@ export type Question ={
     category:string;
     question:string;
     type:string;
-    id:string
+    id:string,
+    callback:any
 }
 
 export type QuestionState = Question & { answers:string[]}
