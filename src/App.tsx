@@ -23,14 +23,12 @@ function App() {
   },[])
 
   const userClick = (e: any)=>{
-    console.log(e.target.innerText)
-    //console.log(e.target.children.firstElementChild.innerText)
     setUserAnswer(e.target.innerText)
-    //console.log('user ans',userAnswer)
-   if(e.target ===questionArr[qNo].correctAnswer){
+    console.log(e.target, questionArr[qNo].correctAnswer)
+   if(e.target.innerText === questionArr[qNo].correctAnswer){
       setCorrect(prev=>prev+1)
     }
-  
+    
   }
   const handleNext=()=>{
     setQNo(prev => prev + 1)
@@ -51,15 +49,19 @@ function App() {
               callback={userClick} userAns={userAnswer} />) : null
          }
          <ButtonContainer>
-          <Button 
-            disabled={qNo === 9 ? true : false} 
+          {qNo < 9?(
+            <Button  
             onClick={() =>handleNext() }>
               Next Question
           </Button>
-          <Button 
+          ):(
+            <Button 
             onClick={()=>setSubmit(true)}>
               Submit Quize
           </Button>
+          )}
+          
+          
         </ButtonContainer>
         </>
       ): (
